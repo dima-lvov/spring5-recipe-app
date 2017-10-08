@@ -3,6 +3,8 @@ package guru.springframework.domain;
 import javax.persistence.*;
 
 /**
+ * Recipe's notes.
+ *
  * Created by jt on 6/13/17.
  */
 @Entity

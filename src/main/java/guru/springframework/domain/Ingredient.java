@@ -4,6 +4,8 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 
 /**
+ * Recipe's ingredient.
+ *
  * Created by jt on 6/13/17.
  */
 @Entity

@@ -4,6 +4,8 @@ import javax.persistence.*;
 import java.util.Set;
 
 /**
+ * Recipe.
+ *
  * Created by jt on 6/13/17.
  */
 @Entity
