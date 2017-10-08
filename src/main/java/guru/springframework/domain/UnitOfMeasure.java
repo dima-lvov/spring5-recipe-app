@@ -33,4 +33,26 @@ public class UnitOfMeasure {
     public void setDescription(String description) {
         this.description = description;
     }
+
+	public UnitOfMeasure() {
+	}
+
+	public UnitOfMeasure(final String description) {
+		this.description = description;
+	}
+
+	@Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        final UnitOfMeasure that = (UnitOfMeasure) o;
+
+        return description != null ? description.equals(that.description) : that.description == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return description != null ? description.hashCode() : 0;
+    }
 }

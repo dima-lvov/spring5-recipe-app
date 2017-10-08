@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -13,13 +14,14 @@ import java.util.Set;
  * Created by Dimon on 08.10.2017
  */
 @Entity
-public class Catergory {
+public class Category {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String categoryName;
+	private String description;
+
 	@ManyToMany(mappedBy = "categories")
-	private Set<Recipe> recipes;
+	private Set<Recipe> recipes = new HashSet<>();
 
 	public Long getId() {
 		return id;
@@ -29,12 +31,12 @@ public class Catergory {
 		this.id = id;
 	}
 
-	public String getCategoryName() {
-		return categoryName;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setCategoryName(final String categoryName) {
-		this.categoryName = categoryName;
+	public void setDescription(final String description) {
+		this.description = description;
 	}
 
 	public Set<Recipe> getRecipes() {
