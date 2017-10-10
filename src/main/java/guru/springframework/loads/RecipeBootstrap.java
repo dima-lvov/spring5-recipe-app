@@ -51,7 +51,6 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 		guacamole.setServings(4);
 		guacamole.setDifficulty(Difficulty.EASY);
 		Notes guacamoleNotes = new Notes();
-		guacamoleNotes.setRecipe(guacamole);
 		guacamoleNotes.setRecipeNotes("For a very quick guacamole just take a 1/4 cup of salsa and mix it in" +
 				" with your mashed avocados.\n" +
 				"Feel free to experiment! One classic Mexican guacamole has pomegranate seeds and chunks of " +
@@ -101,7 +100,6 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 		taco.setDifficulty(Difficulty.MODERATE);
 		taco.setSource("Sally Pasley Vargas");
 		Notes tacoNotes = new Notes();
-		tacoNotes.setRecipe(taco);
 		tacoNotes.setRecipeNotes("We have a family motto and it is this: Everything goes better in a tortilla.\n" +
 				"Any and every kind of leftover can go inside a warm tortilla, usually with a healthy dose of pickled " +
 				"jalapenos. I can always sniff out a late-night snacker when the aroma of tortillas heating in a hot " +
@@ -147,17 +145,20 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 		UnitOfMeasure cup = unitOfMeasureRepository.findByDescription("Cup").get();
 		UnitOfMeasure dash = unitOfMeasureRepository.findByDescription("Dash").get();
 
-		Set<Ingredient> ingredients = new HashSet<Ingredient>() {{
-			add(new Ingredient("Ripe avocados", BigDecimal.valueOf(2), each, owner));
-			add(new Ingredient("Kosher salt", BigDecimal.valueOf(0.5), teaspoon, owner));
-			add(new Ingredient("Fresh lime juice or lemon juice", BigDecimal.valueOf(1), tablespoon, owner));
-			add(new Ingredient("Minced red onion or thinly sliced green", BigDecimal.valueOf(0.25), cup, owner));
-			add(new Ingredient("Serrano chilies, stems and seeds removed, minced", BigDecimal.valueOf(2), each, owner));
-			add(new Ingredient("Tablespoons cilantro (leaves and tender stems), finely chopped", BigDecimal.valueOf(2), each, owner));
-			add(new Ingredient("Freshly grated black pepper", BigDecimal.valueOf(1), dash, owner));
-			add(new Ingredient("Ripe tomato, seeds and pulp removed, chopped", BigDecimal.valueOf(0.5), each, owner));
-		}};
-		owner.setIngredients(ingredients);
+		owner.addIngredient(new Ingredient("Ripe avocados", BigDecimal.valueOf(2), each)).
+				addIngredient(new Ingredient("Kosher salt", BigDecimal.valueOf(0.5), teaspoon)).
+				addIngredient(new Ingredient("Fresh lime juice or lemon juice",
+						BigDecimal.valueOf(1), tablespoon)).
+				addIngredient(new Ingredient("Minced red onion or thinly sliced green",
+						BigDecimal.valueOf(0.25), cup)).
+				addIngredient(new Ingredient("Serrano chilies, stems and seeds removed, minced",
+						BigDecimal.valueOf(2), each)).
+				addIngredient(new Ingredient("Tablespoons cilantro (leaves and tender stems), finely chopped",
+						BigDecimal.valueOf(2), each)).
+				addIngredient(new Ingredient("Freshly grated black pepper", BigDecimal.valueOf(1), dash)).
+				addIngredient(new Ingredient("Ripe tomato, seeds and pulp removed, chopped",
+						BigDecimal.valueOf(0.5), each));
+
 	}
 
 	private final void addTacoIngredients(Recipe owner) {
@@ -165,18 +166,15 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 		UnitOfMeasure tablespoon = unitOfMeasureRepository.findByDescription("Tablespoon").get();
 		UnitOfMeasure each = unitOfMeasureRepository.findByDescription("Each").get();
 
-		Set<Ingredient> ingredients = new HashSet<Ingredient>() {{
-			add(new Ingredient("Ancho chili powder", BigDecimal.valueOf(2), tablespoon, owner));
-			add(new Ingredient("Dried oregano", BigDecimal.valueOf(1), teaspoon, owner));
-			add(new Ingredient("Dried cumin", BigDecimal.valueOf(1), teaspoon, owner));
-			add(new Ingredient("Sugar", BigDecimal.valueOf(1), teaspoon, owner));
-			add(new Ingredient("Salt", BigDecimal.valueOf(0.5), teaspoon, owner));
-			add(new Ingredient("Glove garlic, finely chopped", BigDecimal.valueOf(1), each, owner));
-			add(new Ingredient("Finely grated orange zest", BigDecimal.valueOf(1), tablespoon, owner));
-			add(new Ingredient("Fresh-squeezed orange juice", BigDecimal.valueOf(3), tablespoon, owner));
-			add(new Ingredient("Olive oil", BigDecimal.valueOf(2), tablespoon, owner));
-			add(new Ingredient("Skinless, boneless chicken thighs", BigDecimal.valueOf(6), each, owner));
-		}};
-		owner.setIngredients(ingredients);
+		owner.addIngredient(new Ingredient("Ancho chili powder", BigDecimal.valueOf(2), tablespoon)).
+				addIngredient(new Ingredient("Dried oregano", BigDecimal.valueOf(1), teaspoon)).
+				addIngredient(new Ingredient("Dried cumin", BigDecimal.valueOf(1), teaspoon)).
+				addIngredient(new Ingredient("Sugar", BigDecimal.valueOf(1), teaspoon)).
+				addIngredient(new Ingredient("Salt", BigDecimal.valueOf(0.5), teaspoon)).
+				addIngredient(new Ingredient("Glove garlic, finely chopped", BigDecimal.valueOf(1), each)).
+				addIngredient(new Ingredient("Finely grated orange zest", BigDecimal.valueOf(1), tablespoon)).
+				addIngredient(new Ingredient("Fresh-squeezed orange juice", BigDecimal.valueOf(3), tablespoon)).
+				addIngredient(new Ingredient("Olive oil", BigDecimal.valueOf(2), tablespoon)).
+				addIngredient(new Ingredient("Skinless, boneless chicken thighs", BigDecimal.valueOf(6), each));
 	}
 }
