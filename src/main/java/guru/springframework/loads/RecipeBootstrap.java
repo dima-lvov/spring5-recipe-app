@@ -8,9 +8,11 @@ import guru.springframework.domain.UnitOfMeasure;
 import guru.springframework.repositories.CategoryRepository;
 import guru.springframework.repositories.RecipeRepository;
 import guru.springframework.repositories.UnitOfMeasureRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.HashSet;
@@ -22,6 +24,7 @@ import static java.util.Arrays.asList;
 /**
  * Created by Dimon on 08.10.2017
  */
+@Slf4j
 @Component
 public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
@@ -38,7 +41,9 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 	}
 
 	@Override
+	@Transactional
 	public void onApplicationEvent(final ContextRefreshedEvent event) {
+		log.debug("---->ContextRefreshedEvent...");
 		recipeRepository.saveAll(getRecipes());
 	}
 
@@ -139,6 +144,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 	}
 
 	private final void addGuacamoleIngredients(Recipe owner) {
+		log.debug("----> addGuacamoleIngredients...");
 		UnitOfMeasure teaspoon = unitOfMeasureRepository.findByDescription("Teaspoon").get();
 		UnitOfMeasure tablespoon = unitOfMeasureRepository.findByDescription("Tablespoon").get();
 		UnitOfMeasure each = unitOfMeasureRepository.findByDescription("Each").get();
@@ -162,6 +168,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 	}
 
 	private final void addTacoIngredients(Recipe owner) {
+		log.debug("----> addTacoIngredients...");
 		UnitOfMeasure teaspoon = unitOfMeasureRepository.findByDescription("Teaspoon").get();
 		UnitOfMeasure tablespoon = unitOfMeasureRepository.findByDescription("Tablespoon").get();
 		UnitOfMeasure each = unitOfMeasureRepository.findByDescription("Each").get();
