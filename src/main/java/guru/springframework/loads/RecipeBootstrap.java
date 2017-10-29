@@ -15,9 +15,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import static java.util.Arrays.asList;
 
@@ -151,19 +149,19 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 		UnitOfMeasure cup = unitOfMeasureRepository.findByDescription("Cup").get();
 		UnitOfMeasure dash = unitOfMeasureRepository.findByDescription("Dash").get();
 
-		owner.addIngredient(new Ingredient("Ripe avocados", BigDecimal.valueOf(2), each)).
-				addIngredient(new Ingredient("Kosher salt", BigDecimal.valueOf(0.5), teaspoon)).
+		owner.addIngredient(new Ingredient("Ripe avocados", toBigDecimal(2), each)).
+				addIngredient(new Ingredient("Kosher salt", toBigDecimal(0.5), teaspoon)).
 				addIngredient(new Ingredient("Fresh lime juice or lemon juice",
-						BigDecimal.valueOf(1), tablespoon)).
+						toBigDecimal(1), tablespoon)).
 				addIngredient(new Ingredient("Minced red onion or thinly sliced green",
-						BigDecimal.valueOf(0.25), cup)).
+						toBigDecimal(0.25), cup)).
 				addIngredient(new Ingredient("Serrano chilies, stems and seeds removed, minced",
-						BigDecimal.valueOf(2), each)).
+						toBigDecimal(2), each)).
 				addIngredient(new Ingredient("Tablespoons cilantro (leaves and tender stems), finely chopped",
-						BigDecimal.valueOf(2), each)).
-				addIngredient(new Ingredient("Freshly grated black pepper", BigDecimal.valueOf(1), dash)).
+						toBigDecimal(2), each)).
+				addIngredient(new Ingredient("Freshly grated black pepper", toBigDecimal(1), dash)).
 				addIngredient(new Ingredient("Ripe tomato, seeds and pulp removed, chopped",
-						BigDecimal.valueOf(0.5), each));
+						toBigDecimal(0.5), each));
 
 	}
 
@@ -173,15 +171,22 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 		UnitOfMeasure tablespoon = unitOfMeasureRepository.findByDescription("Tablespoon").get();
 		UnitOfMeasure each = unitOfMeasureRepository.findByDescription("Each").get();
 
-		owner.addIngredient(new Ingredient("Ancho chili powder", BigDecimal.valueOf(2), tablespoon)).
-				addIngredient(new Ingredient("Dried oregano", BigDecimal.valueOf(1), teaspoon)).
-				addIngredient(new Ingredient("Dried cumin", BigDecimal.valueOf(1), teaspoon)).
-				addIngredient(new Ingredient("Sugar", BigDecimal.valueOf(1), teaspoon)).
-				addIngredient(new Ingredient("Salt", BigDecimal.valueOf(0.5), teaspoon)).
-				addIngredient(new Ingredient("Glove garlic, finely chopped", BigDecimal.valueOf(1), each)).
-				addIngredient(new Ingredient("Finely grated orange zest", BigDecimal.valueOf(1), tablespoon)).
-				addIngredient(new Ingredient("Fresh-squeezed orange juice", BigDecimal.valueOf(3), tablespoon)).
-				addIngredient(new Ingredient("Olive oil", BigDecimal.valueOf(2), tablespoon)).
-				addIngredient(new Ingredient("Skinless, boneless chicken thighs", BigDecimal.valueOf(6), each));
+		owner.addIngredient(new Ingredient("Ancho chili powder", toBigDecimal(2), tablespoon)).
+				addIngredient(new Ingredient("Dried oregano", toBigDecimal(1), teaspoon)).
+				addIngredient(new Ingredient("Dried cumin",toBigDecimal(1), teaspoon)).
+				addIngredient(new Ingredient("Sugar", toBigDecimal(1), teaspoon)).
+				addIngredient(new Ingredient("Salt", toBigDecimal(0.5), teaspoon)).
+				addIngredient(new Ingredient("Glove garlic, finely chopped", toBigDecimal(1), each)).
+				addIngredient(new Ingredient("Finely grated orange zest", toBigDecimal(1), tablespoon)).
+				addIngredient(new Ingredient("Fresh-squeezed orange juice", toBigDecimal(3), tablespoon)).
+				addIngredient(new Ingredient("Olive oil", toBigDecimal(2), tablespoon)).
+				addIngredient(new Ingredient("Skinless, boneless chicken thighs", toBigDecimal(6), each));
+	}
+
+	private BigDecimal toBigDecimal(Integer number) {
+		return BigDecimal.valueOf(number);
+	}
+	private BigDecimal toBigDecimal(Double number) {
+		return BigDecimal.valueOf(number);
 	}
 }
