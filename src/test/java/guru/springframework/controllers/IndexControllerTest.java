@@ -7,23 +7,22 @@ import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.lang.Nullable;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
 
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
+import static org.hamcrest.Matchers.equalTo;
+import static org.junit.Assert.assertThat;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 /**
  * Created by Dimon on 01.11.2017
@@ -63,11 +62,23 @@ public class IndexControllerTest {
 
 		final String actualViewName = controller.getIndexPage(model);
 		assertThat(actualViewName, equalTo(EXPECTED_INDEX_PAGE_NAME));
+
 		verify(recipeService, times(1)).getAll();
 		verify(model, times(1))
 				.addAttribute(eq(RECIPES_ATTRIBUTE_NAME), argumentCaptor.capture());
 
-		assertThat(argumentCaptor.getValue(), equalTo(recipes));
+		final Set<Recipe> setInModel = argumentCaptor.getValue();
+		assertThat(setInModel, equalTo(recipes));
 	}
 
+	@Test
+	public void getIndexPageMockMVC() throws Exception {
+		final MockMvc mockMvc = MockMvcBuilders
+				.standaloneSetup(controller)
+				.build();
+		mockMvc
+				.perform(get("/"))
+				.andExpect(status().isOk())
+				.andExpect(view().name("index"));
+	}
 }
