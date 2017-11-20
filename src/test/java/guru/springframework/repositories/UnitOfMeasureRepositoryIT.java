@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.Optional;
 
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -26,6 +27,7 @@ public class UnitOfMeasureRepositoryIT {
 	@Test
 	public void findByDescription() throws Exception {
 		final Optional<UnitOfMeasure> uomOptional = unitOfMeasureRepository.findByDescription("Teaspoon");
+		assertThat(uomOptional.isPresent(), is(true));
 		assertThat(uomOptional.get().getDescription(), equalTo("Teaspoon"));
 	}
 }
