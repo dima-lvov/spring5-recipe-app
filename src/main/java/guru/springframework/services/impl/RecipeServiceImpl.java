@@ -28,6 +28,11 @@ public class RecipeServiceImpl implements RecipeService {
 		return toList(recipeRepository.findAll());
 	}
 
+	@Override
+	public Recipe getById(final Long id) {
+		return null;
+	}
+
 	private <T> List<T> toList(final Iterable<T> iterable) {
 		List<T> list = new ArrayList<>();
 		if (Objects.nonNull(iterable)) {
