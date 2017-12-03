@@ -30,7 +30,7 @@ public class RecipeServiceImpl implements RecipeService {
 
 	@Override
 	public Recipe getById(final Long id) {
-		return null;
+		return recipeRepository.findById(id).get();
 	}
 
 	private <T> List<T> toList(final Iterable<T> iterable) {
