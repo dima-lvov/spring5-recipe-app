@@ -8,9 +8,9 @@ import guru.springframework.domain.Recipe;
  */
 public interface RecipeService {
 
-	Iterable<Recipe> getAll();
+	Iterable<Recipe> getRecipes();
 
-	Recipe getById(final Long id);
+	Recipe findById(final Long id);
 
 	RecipeCommand saveRecipeCommand(final RecipeCommand command);
 }

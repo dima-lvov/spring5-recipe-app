@@ -56,14 +56,14 @@ public class IndexControllerTest {
 		recipes.add(firstRecipe);
 		recipes.add(secondRecipe);
 
-		when(recipeService.getAll()).thenReturn(recipes);
+		when(recipeService.getRecipes()).thenReturn(recipes);
 		
 		final ArgumentCaptor<Set<Recipe>> argumentCaptor = ArgumentCaptor.forClass(Set.class);
 
 		final String actualViewName = controller.getIndexPage(model);
 		assertThat(actualViewName, equalTo(EXPECTED_INDEX_PAGE_NAME));
 
-		verify(recipeService, times(1)).getAll();
+		verify(recipeService, times(1)).getRecipes();
 		verify(model, times(1))
 				.addAttribute(eq(RECIPES_ATTRIBUTE_NAME), argumentCaptor.capture());
 

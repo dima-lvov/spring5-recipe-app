@@ -22,7 +22,7 @@ public class RecipeCommandToRecipeTest {
     public static final String SOURCE = "Source";
     public static final String URL = "Some URL";
     public static final Long CAT_ID_1 = 1L;
-    public static final Long CAT_ID2 = 2L;
+    public static final Long CAT_ID_2 = 2L;
     public static final Long INGRED_ID_1 = 3L;
     public static final Long INGRED_ID_2 = 4L;
     public static final Long NOTES_ID = 9L;
@@ -70,7 +70,7 @@ public class RecipeCommandToRecipeTest {
         category.setId(CAT_ID_1);
 
         CategoryCommand category2 = new CategoryCommand();
-        category2.setId(CAT_ID2);
+        category2.setId(CAT_ID_2);
 
         recipeCommand.getCategories().add(category);
         recipeCommand.getCategories().add(category2);
