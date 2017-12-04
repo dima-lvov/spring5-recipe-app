@@ -12,7 +12,7 @@ import javax.persistence.OneToOne;
 /**
  * Recipe's notes.
  *
- * Created by jt on 6/13/17.
+ * Created by Dimon.
  */
 @Data
 @Entity

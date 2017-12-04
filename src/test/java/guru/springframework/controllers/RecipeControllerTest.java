@@ -12,40 +12,39 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
  * Created by Dimon on 21.11.2017
  */
 public class RecipeControllerTest {
 
-	@Mock
-	private RecipeService recipeService;
 
-	private RecipeController recipeController;
+	@Mock
+	RecipeService recipeService;
+
+	RecipeController controller;
 
 	@Before
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
-		recipeController = new RecipeController(recipeService);
+
+		controller = new RecipeController(recipeService);
 	}
 
 	@Test
-	public void getById() throws Exception {
-		final Recipe recipe = new Recipe();
+	public void testGetRecipe() throws Exception {
+
+		Recipe recipe = new Recipe();
 		recipe.setId(1L);
 
-		final MockMvc mockMvc = MockMvcBuilders
-				.standaloneSetup(recipeController)
-				.build();
+		MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
 
-		when(recipeService.getById(anyLong())).thenReturn(recipe);
+		when(recipeService.findById(anyLong())).thenReturn(recipe);
 
-		mockMvc
-				.perform(get("/recipe/show/1"))
+		mockMvc.perform(get("/recipe/show/1"))
 				.andExpect(status().isOk())
-				.andExpect(view().name("/recipe/show"));
+				.andExpect(view().name("recipe/show"))
+				.andExpect(model().attributeExists("recipe"));
 	}
-
 }

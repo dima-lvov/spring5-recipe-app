@@ -10,7 +10,7 @@ import javax.persistence.Id;
 /**
  * Unit of measure.
  *
- * Created by jt on 6/13/17.
+ * Created by Dimon.
  */
 @Data
 @Entity
