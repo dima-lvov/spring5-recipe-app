@@ -3,14 +3,20 @@ package guru.springframework.services;
 import guru.springframework.commands.RecipeCommand;
 import guru.springframework.domain.Recipe;
 
+import java.util.Set;
+
 /**
  * Created by Dimon on 08.10.2017
  */
 public interface RecipeService {
 
-	Iterable<Recipe> getRecipes();
+    Set<Recipe> getRecipes();
 
-	Recipe findById(final Long id);
+    Recipe findById(Long l);
 
-	RecipeCommand saveRecipeCommand(final RecipeCommand command);
+    RecipeCommand findCommandById(Long l);
+
+    RecipeCommand saveRecipeCommand(RecipeCommand command);
+
+    void deleteById(Long idToDelete);
 }
